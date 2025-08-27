@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Gabriely R. – Full Stack / Back-end</title>
+    <meta name="description" content="Portfólio de Gabriely Rodrigues – Desenvolvedora Back‑end C#, .NET e Go (Golang)" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.47.0/tabler-icons.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
+    <style>
+        :root{
+            --bg:#e9f1e6;
+            --ink:#0b2b1f;
+            --ink-2:#143b2b;
+            --brand:#1a5c3d;
+            --brand-2:#0f4a31;
+            --accent:#86d993;
+            --chip:#d5e8d7;
+            --muted:#6a7f73;
+            --card:#f6fbf5;
+            --shadow: 0 20px 40px rgba(0,0,0,.08);
+            --radius:18px;
+        }
+        *{box-sizing:border-box}
+        html{scroll-behavior:smooth}
+        body{margin:0;font-family:Inter,system-ui,Arial; color:var(--ink); background:var(--bg)}
+        a{color:inherit}
+        img{max-width:100%; display:block}
+        .container{max-width:1080px; margin:0 auto; padding:0 20px}
+
+        /* NAV */
+        .nav{
+            position:sticky; top:0; z-index:50; backdrop-filter:saturate(180%) blur(8px);
+            background:rgba(233,241,230,.7); border-bottom:1px solid #dfe8db;
+        }
+        .nav-inner{display:flex; align-items:center; gap:24px; height:72px}
+        .logo{display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:.5px}
+        .logo .mark{width:38px; height:38px; border-radius:10px; background:linear-gradient(135deg,var(--brand),#2aa06b); display:grid;place-items:center; color:white; box-shadow:var(--shadow)}
+        .nav ul{list-style:none; margin:0 0 0 auto; padding:0; display:flex; gap:16px; align-items:center}
+        .nav a{padding:10px 14px; border-radius:999px; text-decoration:none; font-weight:600}
+        .nav a:hover{background:var(--chip)}
+        .cta{background:var(--brand); color:#fff !important; box-shadow:var(--shadow)}
+        .cta:hover{background:var(--brand-2)}
+        
+        /* HERO */
+        .hero{position:relative; overflow:hidden}
+        .hero .wrap{display:grid; grid-template-columns:1.1fr .9fr; gap:32px; padding:56px 0}
+        .eyebrow{font-weight:700; color:var(--muted); letter-spacing:.08em}
+        .title{font-family:"Playfair Display", serif; font-weight:900; line-height:1.04; font-size:56px; margin:14px 0 16px}
+        .title .accent{color:var(--brand)}
+        .subtitle{font-size:18px; color:var(--ink-2)}
+        .hero-cta{margin-top:28px; display:flex; gap:14px; flex-wrap:wrap}
+        .btn{
+            display:inline-flex; gap:10px; align-items:center; padding:12px 18px; border-radius:12px; text-decoration:none; font-weight:700; border:2px solid transparent;
+            transition: transform .2s ease, background .2s ease, box-shadow .2s ease;
+        }
+        .btn:hover{transform:translateY(-3px); box-shadow:0 12px 24px rgba(0,0,0,.15)}
+        .btn:active{transform:translateY(-1px); box-shadow:0 6px 12px rgba(0,0,0,.1); transition-duration:.1s}
+        .btn i{transition: transform .2s ease}
+        .btn:hover i{transform:translateX(4px)}
+        .btn.primary{background:var(--brand); color:#fff; box-shadow:var(--shadow)}
+        .btn.primary:hover{background:var(--brand-2)}
+        .btn.ghost{border-color:var(--brand); color:var(--brand); background:rgba(26,92,61,.06)}
+        .btn.ghost:hover{background:rgba(26,92,61,.12)}
+        .illus{position:relative; padding:20px; border-radius:22px; background:var(--card); box-shadow:var(--shadow)}
+
+        /* SECTION BASE */
+        section{scroll-margin-top:88px}
+        .sec{background:var(--brand); color:#fff; border-radius:26px; box-shadow:var(--shadow)}
+        .sec .inner{display:grid; grid-template-columns:380px 1fr; gap:28px; padding:40px}
+
+        /* ABOUT */
+        .about .badge{margin-top:-10px; display:flex; align-items:center; gap:10px; background:#103c2a; padding:10px 14px; border-radius:999px; width:max-content}
+        .about h2{margin:0 0 10px; font-size:28px}
+        .about p{line-height:1.65}
+        .pillbar{display:flex; gap:10px; margin-top:14px; flex-wrap:wrap}
+        .pill{background:#103c2a; border:1px solid rgba(255,255,255,.1); padding:6px 12px; border-radius:999px; font-weight:600}
+        .actions{display:flex; gap:14px; margin-top:18px}
+
+        /* PORTFOLIO */
+        .portfolio{margin-top:38px}
+        .carousel-wrapper{
+            position:relative;
+            margin-top:18px;
+            max-width:100%;
+            padding-bottom: 60px; /* Espaço para os botões */
+        }
+        .carousel{
+            display:flex;
+            overflow-x:scroll;
+            scroll-snap-type:x mandatory;
+            -webkit-overflow-scrolling:touch;
+            gap:18px;
+            padding:0 10px;
+            scroll-behavior: smooth;
+        }
+        .carousel::-webkit-scrollbar{display:none}
+        .carousel-item{
+            min-width:calc(100% - 20px);
+            scroll-snap-align:start;
+            background:#fff;
+            border-radius:18px;
+            box-shadow:var(--shadow);
+            padding:20px;
+            color:var(--ink);
+            position:relative;
+        }
+        .carousel-item .row{display:grid; grid-template-columns:1fr 120px; align-items:center}
+        .carousel-footer{
+            position:absolute;
+            bottom:0;
+            left:0;
+            right:0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 10px;
+        }
+        .carousel-nav{
+            display:flex;
+            gap:10px;
+        }
+        .carousel-nav button{
+            width:40px;
+            height:40px;
+            border:1px solid #ddd;
+            border-radius:50%;
+            background:#fff;
+            color:var(--ink);
+            cursor:pointer;
+            box-shadow:var(--shadow);
+            display:grid;place-items:center;
+            transition:.2s transform ease;
+        }
+        .carousel-nav button:hover{transform:scale(1.1)}
+        .chip{display:inline-flex; align-items:center; gap:8px; background:var(--chip); padding:6px 10px; border-radius:999px; font-weight:600}
+        .avatar{width:64px; height:64px; border-radius:50%; background:var(--chip); display:grid; place-items:center}
+        .saiba-mais{
+            background-color:var(--brand);
+            color:#fff;
+            padding:8px 14px;
+            border-radius:8px;
+            font-weight:700;
+            text-decoration:none;
+            transition:.2s background-color ease;
+        }
+        .saiba-mais:hover{background-color:var(--brand-2)}
+
+        /* EXPERIENCE */
+        .experience { margin-top: 40px; }
+        .experience h2 { margin: 0 0 20px; }
+        .timeline { position: relative; max-width: 800px; margin: 0 auto; padding-left: 20px; }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 4px;
+            height: 100%;
+            background: #d4d4d4;
+            transform: translateX(-50%);
+        }
+        .timeline-item {
+            margin-bottom: 20px;
+            position: relative;
+            background: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+        }
+        .timeline-item:nth-child(even) { text-align: right; }
+        .timeline-item h3 { margin: 0 0 5px; color: var(--brand); }
+        .timeline-item h4 { margin: 0 0 10px; font-weight: 500; color: var(--muted); }
+        .timeline-item p { margin: 0; }
+        .timeline-dot {
+            position: absolute;
+            top: 25px;
+            left: 50%;
+            width: 24px;
+            height: 24px;
+            background: var(--brand);
+            border: 4px solid #fff;
+            border-radius: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+        }
+        
+        /* CONTACT */
+        .contact{background:#5a5a5a; color:#fff; border-radius:26px; margin:40px 0}
+        .contact .inner{display:grid; grid-template-columns:1fr 1fr; gap:28px; padding:34px}
+        .contact .kv{display:grid; gap:14px}
+        .contact .kv .line{display:flex; align-items:center; gap:12px}
+        .contact .social a{display:flex; align-items:center; gap:10px; padding:8px 10px; text-decoration:none; color:#fff; border-radius:10px}
+        .contact .social a:hover{background:rgba(255,255,255,.08)}
+        .input{background:#fff; color:#111; border:none; border-radius:10px; padding:12px 14px; width:100%; font:inherit}
+        .textarea{resize:vertical; min-height:140px}
+        .send{margin-left:auto; margin-top:10px}
+
+        /* MODAL */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(5px);
+            z-index: 100;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.open {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-content {
+            background-color: var(--bg);
+            border-radius: 12px;
+            padding: 30px;
+            width: 90%;
+            max-width: 900px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            transform: translateY(-20px);
+            transition: transform 0.3s ease;
+        }
+        .modal-overlay.open .modal-content {
+            transform: translateY(0);
+        }
+
+        .modal-close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: transparent;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--ink);
+        }
+
+        .modal-header h2 {
+            margin-top: 0;
+            color: var(--brand);
+        }
+        
+        .modal-filters {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .modal-filters .input-search {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 10px;
+            flex-grow: 1;
+            min-width: 200px;
+        }
+
+        .tabs, .subtabs {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .tabs a, .subtabs a {
+            background-color: #f0f0f0;
+            padding: 8px 14px;
+            border-radius: 999px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .tabs a.active, .subtabs a.active {
+            background-color: var(--brand);
+            color: #fff;
+        }
+
+        .modal-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 18px;
+        }
+        .modal-grid .card{box-shadow: none; border:1px solid #eee}
+
+        /* Reveal animations */
+        .reveal{opacity:0; transform:translateY(16px); transition:opacity .6s ease, transform .6s ease}
+        .reveal.in{opacity:1; transform:none}
+        
+        /* Cursor animation */
+        .cursor {
+            animation: blink 1s step-end infinite;
+            display: inline-block;
+            vertical-align: top;
+            color: var(--brand);
+            font-size: 56px;
+        }
+        @keyframes blink {
+            from, to { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* Responsive */
+        @media (max-width: 980px){
+            .hero .wrap{grid-template-columns:1fr; padding:36px 0}
+            .title{font-size:42px}
+            .sec .inner{grid-template-columns:1fr}
+            .timeline::before { left: 10px; }
+            .timeline-item { text-align: left !important; padding-left: 30px; }
+            .timeline-dot { left: 10px; }
+            .contact .inner{grid-template-columns:1fr}
+        }
+        @media (max-width: 640px){
+            .nav a{padding:8px 10px}
+            .title{font-size:36px}
+        }
+    </style>
+</head>
+<body>
+    
+    <nav class="nav">
+        <div class="container nav-inner">
+            <a href="#top" class="logo" aria-label="Página inicial">
+                <span class="mark"><i class="ti ti-code"></i></span>
+                <span>Gabriely R.</span>
+            </a>
+            <ul>
+                <li><a href="#sobre">About Me</a></li>
+                <li><a href="#portfolio">Portfólio</a></li>
+                <li><a href="#xp">Experience</a></li>
+                <li><a href="#contato" class="cta">Contact Me</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main id="top">
+        <section class="hero container">
+            <div class="wrap">
+                <div class="col">
+                    <div class="eyebrow">Hello, my name is <strong>Gabriely</strong></div>
+                    <h1 class="title">
+                        I am,
+                        <span id="typewriter-text" class="accent"></span>
+                        <span class="cursor">|</span>
+                    </h1>
+                    <p class="subtitle">Desenvolvedora back‑end em <strong>C#/.NET</strong> e <strong>Golang</strong> apaixonada por construir soluções robustas e eficientes. Minha missão é transformar desafios complexos em código limpo, que realmente faz a diferença.</p>
+                    <div class="hero-cta">
+                        <a class="btn primary" href="#contato"><i class="ti ti-message-circle"></i> Fale comigo</a>
+                        <a class="btn ghost" href="resume.pdf" download><i class="ti ti-file-text"></i> Resume</a>
+                        <a class="btn ghost" href="cv.pdf" download><i class="ti ti-id"></i> My CV</a>
+                    </div>
+                </div>
+                <div class="illus reveal" aria-hidden="true">
+                    <img alt="Ilustração programadora em estação de trabalho" src="./attach/img/hero.png" />
+                </div>
+            </div>
+        </section>
+
+        <section id="sobre" class="container reveal">
+            <div class="sec about">
+                <div class="inner">
+                    <div>
+                        <img class="photo" src="./attach/img/aboutMe.png" alt="Foto – Gabriely"/>
+                        <div class="badge"><i class="ti ti-user"></i> Desenvolvedora Back‑end</div>
+                    </div>
+                    <div>
+                        <h2>Sobre Mim</h2>
+                        <p>
+                            Minha jornada profissional é guiada pela crença de que a tecnologia é uma 
+                            ferramenta poderosa para gerar mudanças. Do meu estágio na <strong>Volvo do Brasil</strong> 
+                            ao meu trabalho atual na <strong>E-Aware</strong>, sempre busquei ir além do código, focando 
+                            em soluções que não apenas funcionam, mas que também resolvem problemas reais.
+                        </p>
+                        <p>
+                            Essa mesma paixão me levou a ser voluntária no projeto <strong>Adote uma Causa</strong> 
+                            do Instituto GRPCOM, onde pude aplicar minhas habilidades técnicas para apoiar uma causa 
+                            maior. 
+                        </p>
+                        <p>
+                            Com sólida experiência em <strong>C#/.NET</strong> e <strong>Golang</strong>, 
+                            meu objetivo é construir sistemas robustos e eficientes, sempre com um olhar 
+                            atento para a arquitetura limpa e a performance.
+                        </p>
+                        <div class="pillbar" aria-label="stack">
+                            <span class="pill">C# / .NET</span>
+                            <span class="pill">Golang</span>
+                            <span class="pill">EF Core</span>
+                            <span class="pill">PostgreSQL</span>
+                            <span class="pill">Redis</span>
+                            <span class="pill">Azure</span>
+                        </div>
+                        <div class="actions">
+                            <a class="btn primary" href="#portfolio"><i class="ti ti-rocket"></i> Ver Portfólio</a>
+                            <a class="btn ghost" href="#xp"><i class="ti ti-tools"></i> Experiência</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="portfolio" class="container portfolio">
+            <h2 class="reveal" style="margin:0 0 14px">Portfólio</h2>
+            <div class="carousel-wrapper reveal">
+                <div class="carousel" id="carousel">
+                    </div>
+                <div class="carousel-footer">
+                    <div class="carousel-nav">
+                        <button id="carousel-prev" aria-label="Anterior"><i class="ti ti-arrow-left"></i></button>
+                        <button id="carousel-next" aria-label="Próximo"><i class="ti ti-arrow-right"></i></button>
+                    </div>
+                    <a href="#" class="saiba-mais" id="open-modal-btn">Saiba Mais <i class="ti ti-arrow-right"></i></a>
+                </div>
+            </div>
+        </section>
+
+        <section id="xp" class="container experience">
+            <h2 class="reveal">Experiência Profissional</h2>
+            <div class="timeline reveal">
+                <div class="timeline-dot"></div>                
+                <div class="timeline-item">
+                    <h3>Instituto GRPCOM</h3>
+                    <h4>Voluntária no "Adote uma Causa"</h4>
+                    <h5>Julho 2025 - Agosto 2025</h5>
+                    <p>Participação em projetos sociais, aplicando habilidades técnicas para auxiliar ONGs.</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>E-aware</h3>
+                    <h4>Desenvolvedora Backend (C#/.NET e Golang)</h4>
+                    <h5>Maio 2024 - Presente</h5>
+                    <p>Foco em APIs performáticas, integrações e arquitetura limpa. Também atuo com migração de bases legadas e observabilidade.</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>Volvo do Brasil</h3>
+                    <h4>Estágio em Desenvolvimento de Software</h4>
+                    <h5>Março 2022 - Dezembro 2023</h5>
+                    <p>Atuação em projetos internos da empresa, desenvolvendo soluções de software.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contato" class="container">
+            <div class="contact reveal">
+                <div class="inner">
+                    <div class="kv">
+                        <h2>Conecte-se comigo</h2>
+                        <div class="social">
+                            <a href="https://github.com/2zedoj" target="_blank" rel="noreferrer"><i class="ti ti-brand-github"></i> GitHub</a>
+                            <a href="https://www.linkedin.com/in/gabriely-rodrigues-do-carmo-a133a1235" target="_blank" rel="noreferrer"><i class="ti ti-brand-linkedin"></i> LinkedIn</a>
+                            <a href="https://www.instagram.com/gabriely_rod/" target="_blank" rel="noreferrer"><i class="ti ti-brand-instagram"></i> Instagram</a>
+                            <a href="mailto:gabrielydivulga@gmail.com" target="_blank" rel="noreferrer"><i class="ti ti-mail"></i> gabrielydivulga@gmail.com</a>
+                            <a href="https://maps.google.com/?cid=8188241483757303573&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" rel="noreferrer" class="line"><i class="ti ti-map-pin"></i> Colombo, PR – Brasil</a>
+                        </div>
+                    </div>
+                    <form class="form" id="formContato" onsubmit="return sendMessage(event)">
+                        <p>Ou envie-me uma mensagem direta:</p>
+                        <label>
+                            <span class="sr">Email</span>
+                            <input required class="input" type="email" name="email" placeholder="Seu email" />
+                        </label>
+                        <div style="height:10px"></div>
+                        <label>
+                            <span class="sr">Nome</span>
+                            <input required class="input" type="text" name="name" placeholder="Seu nome" />
+                        </label>
+                        <div style="height:10px"></div>
+                        <label>
+                            <span class="sr">Mensagem</span>
+                            <textarea required class="input textarea" name="message" placeholder="Sua mensagem"></textarea>
+                        </label>
+                        <div class="send">
+                            <button class="btn primary" type="submit"><i class="ti ti-send"></i> Enviar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        © <span id="year"></span> Gabriely Rodrigues
+    </footer>
+
+    <div class="modal-overlay" id="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close-btn" id="close-modal-btn"><i class="ti ti-x"></i></button>
+            <div class="modal-header">
+                <h2>Todos os Projetos</h2>
+            </div>
+            <div class="modal-filters">
+                <input type="text" id="filter-search" class="input-search" placeholder="Buscar por título ou descrição..." />
+                <div class="tabs" id="status-tabs" role="tablist">
+                    <a href="#" data-status="all" class="active" role="tab">Todos</a>
+                    <a href="#" data-status="done" role="tab">Finalizados</a>
+                    <a href="#" data-status="progress" role="tab">Em Andamento</a>
+                    <a href="#" data-status="next" role="tab">Na Fila</a>
+                </div>
+                <div class="subtabs" id="type-tabs" role="tablist">
+                    <a href="#" data-type="all" class="active" role="tab">Todos</a>
+                    <a href="#" data-type="csharp" role="tab">C#/.NET</a>
+                    <a href="#" data-type="python" role="tab">Python</a>
+                    <a href="#" data-type="web" role="tab">HTML/CSS/JS</a>
+                    <a href="#" data-type="go" role="tab">Golang</a>
+                    <a href="#" data-type="others" role="tab">Outros</a>
+                </div>
+            </div>
+            <div class="modal-grid" id="modal-projects-grid">
+                </div>
+        </div>
+    </div>
+
+    <button id="toTop" aria-label="Voltar ao topo" title="Topo" style="position:fixed; right:18px; bottom:18px; width:48px; height:48px; border:none; border-radius:50%; background:var(--brand); color:#fff; box-shadow:var(--shadow); display:none"><i class="ti ti-arrow-up"></i></button>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log("DOM totalmente carregado. Iniciando scripts...");
+
+            // utils - Mova este bloco para o topo!
+            const $ = (q,doc=document)=>doc.querySelector(q);
+            const $$ = (q,doc=document)=>Array.from(doc.querySelectorAll(q));
+            $('#year').textContent = new Date().getFullYear();
+
+            // Efeito de digitação
+            const typewriterText = $('#typewriter-text');
+            const texts = ['FULL STACK', 'BACK-END', 'SOFTWARE DEVELOPER'];
+            let textIndex = 0;
+            let charIndex = 0;
+            let isDeleting = false;
+
+            function typeWriterEffect() {
+                const currentText = texts[textIndex];
+                const delay = isDeleting ? 50 : 150;
+                
+                typewriterText.textContent = isDeleting 
+                    ? currentText.substring(0, charIndex--)
+                    : currentText.substring(0, charIndex++);
+
+                if (!isDeleting && charIndex > currentText.length) {
+                    setTimeout(() => isDeleting = true, 1000);
+                } else if (isDeleting && charIndex < 0) {
+                    isDeleting = false;
+                    textIndex = (textIndex + 1) % texts.length;
+                }
+
+                setTimeout(typeWriterEffect, delay);
+            }
+            
+            // Verifique se o elemento existe antes de chamar a função
+            if (typewriterText) {
+                typeWriterEffect();
+            }
+
+            // Intersection Observer (para animações)
+            const io = new IntersectionObserver(entries=>{
+                for (const e of entries){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} }
+            },{threshold:.12});
+
+
+            // Dados de todos os projetos (mais fácil de filtrar)
+            const allProjects = [
+                { id:1, type:'web', status:'done', title:'Lading Page - Instituto ProbEM', desc:'Um projeto especial onde criei a presença online do Instituto ProbEM, que não possuía site. A iniciativa foi 100% pro bono e me permitiu aplicar conhecimentos em HTML, CSS, JavaScript e SEO, utilizando Google Search Console e a metodologia Clarity para otimizar o desempenho. Mais do que um site, é uma ponte digital para uma causa importante.', tags:['HTML/CSS','JavaScript','Microsoft Clarity','Google Search Console', 'SEO','Adote uma Causa'], link:'https://github.com/2zedoj/lp-instituto-probem' },
+                { id:2, type:'go', status:'progress', title:'Melhorando Desafios em Golang (DIO)', desc:'ste projeto vai além de um simples curso. Para cada módulo, criei desafios práticos e depois os refatorei, aplicando conceitos mais avançados de Golang aprendidos nos módulos seguintes. Ele demonstra minha capacidade de ir além do básico, buscando otimizar soluções com código limpo e eficiente.', tags:['Golang','Otimização', 'Refatoração', 'Clean Code', 'Boas Práticas'], link:'https://github.com/2zedoj/Go-developer-learn' },
+                { id:3, type:'others', status:'done', title:'Conscientização sobre Esclerose Múltipla - Materiais', desc:'Durante a minha atuação no projeto "Adote uma Causa", fui responsável por desenvolver materiais de divulgação e conscientização para o público. Para superar o desafio inicial de design, usei a IA do Canva para gerar ideias. A partir daí, criei todo o conteúdo e o layout, adaptando os modelos para comunicar uma mensagem clara e impactante. Este projeto demonstra minha habilidade em resolver problemas criativos, além de reforçar meu compromisso com causas sociais.', tags:['Design Gráfico', 'Canva AI', 'Adote Uma Causa'], link:'https://www.canva.com/design/DAGxO6uXq8k/6odp6jl0g7lYKvhhVYO4xA/edit?utm_content=DAGxO6uXq8k&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton' },
+            ];
+
+            // Função para criar o HTML de um card
+            function createCard(p) {
+                return `
+                    <article class="card reveal" data-id="${p.id}">
+                        <div class="row">
+                            <div>
+                                <h3 style="margin:0 0 8px">${p.title}</h3>
+                                <p style="margin:0 0 14px">${p.desc}</p>
+                                <div style="display:flex;gap:8px;flex-wrap:wrap">
+                                    ${p.tags.map(t=>`<span class='chip'><i class="ti ti-tag"></i> ${t}</span>`).join('')}
+                                </div>
+                                <div style="margin-top:12px">
+                                    <a class="btn ghost" href="${p.link}" target="_blank" rel="noopener noreferrer"><i class="ti ti-external-link"></i> Ver mais</a>
+                                </div>
+                            </div>
+                            <div style="display:grid;place-items:center">
+                                <div class="avatar"><i class="ti ti-brand-github" style="font-size: 32px"></i></div>
+                            </div>
+                        </div>
+                    </article>
+                `;
+            }
+
+            // Carrossel
+            const carousel = $('#carousel');
+            const prevBtn = $('#carousel-prev');
+            const nextBtn = $('#carousel-next');
+            const carouselProjects = allProjects.filter(p => p.status === 'done');
+            
+            function renderCarousel() {
+                carousel.innerHTML = carouselProjects.map(p => {
+                    const card = createCard(p);
+                    return `<div class="carousel-item">${card}</div>`;
+                }).join('');
+                
+                // Re-observar para as animações de reveal
+                $$('.reveal').forEach(el=>io.observe(el));
+            }
+
+            if (carouselProjects.length > 0) {
+                renderCarousel();
+
+                // Adicionar os event listeners APÓS o carrossel ser renderizado
+                nextBtn.addEventListener('click', () => {
+                    console.log('Botão Próximo clicado!');
+                    carousel.scrollBy({ left: carousel.offsetWidth, behavior: 'smooth' });
+                });
+                prevBtn.addEventListener('click', () => {
+                    console.log('Botão Anterior clicado!');
+                    carousel.scrollBy({ left: -carousel.offsetWidth, behavior: 'smooth' });
+                });
+            }
+
+            // Modal
+            const modalOverlay = $('#modal-overlay');
+            const openModalBtn = $('#open-modal-btn');
+            const closeModalBtn = $('#close-modal-btn');
+            const modalGrid = $('#modal-projects-grid');
+            const statusTabs = $('#status-tabs');
+            const typeTabs = $('#type-tabs');
+            const filterSearch = $('#filter-search');
+
+            let filterStatus = 'all';
+            let filterType = 'all';
+            let searchTerm = '';
+
+            function renderModalProjects(projectsToRender) {
+                modalGrid.innerHTML = projectsToRender.map(createCard).join('');
+                // Re-observar para as animações de reveal
+                $$('.reveal').forEach(el=>io.observe(el));
+            }
+
+            function filterAndRender() {
+                const filtered = allProjects.filter(p => {
+                    const matchesStatus = filterStatus === 'all' || p.status === filterStatus;
+                    const matchesType = filterType === 'all' || p.type === filterType;
+                    const matchesSearch = p.title.toLowerCase().includes(searchTerm) || p.desc.toLowerCase().includes(searchTerm);
+                    return matchesStatus && matchesType && matchesSearch;
+                });
+                renderModalProjects(filtered);
+            }
+
+            openModalBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                modalOverlay.classList.add('open');
+                document.body.style.overflow = 'hidden';
+                filterAndRender();
+            });
+
+            closeModalBtn.addEventListener('click', () => {
+                modalOverlay.classList.remove('open');
+                document.body.style.overflow = '';
+            });
+
+            modalOverlay.addEventListener('click', (e) => {
+                if (e.target === modalOverlay) {
+                    modalOverlay.classList.remove('open');
+                    document.body.style.overflow = '';
+                }
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && modalOverlay.classList.contains('open')) {
+                    modalOverlay.classList.remove('open');
+                    document.body.style.overflow = '';
+                }
+            });
+
+            statusTabs.addEventListener('click', (e) => {
+                const target = e.target.closest('a');
+                if (target) {
+                    e.preventDefault();
+                    $$('#status-tabs a').forEach(a => a.classList.remove('active'));
+                    target.classList.add('active');
+                    filterStatus = target.dataset.status;
+                    filterAndRender();
+                }
+            });
+
+            typeTabs.addEventListener('click', (e) => {
+                const target = e.target.closest('a');
+                if (target) {
+                    e.preventDefault();
+                    $$('#type-tabs a').forEach(a => a.classList.remove('active'));
+                    target.classList.add('active');
+                    filterType = target.dataset.type;
+                    filterAndRender();
+                }
+            });
+
+            filterSearch.addEventListener('input', (e) => {
+                searchTerm = e.target.value.toLowerCase().trim();
+                filterAndRender();
+            });
+
+            // Iniciar observação das animações
+            $$('.reveal').forEach(el=>io.observe(el));
+
+            // Back to top
+            const toTop = $('#toTop');
+            window.addEventListener('scroll',()=>{
+                toTop.style.display = window.scrollY>600 ? 'grid' : 'none';
+            });
+            toTop.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+
+            // Form (simples: abre e-mail)
+            function sendMessage(ev){
+                ev.preventDefault();
+                const data = Object.fromEntries(new FormData(ev.target));
+                const subject = encodeURIComponent(`Contato pelo portfólio – ${data.name}`);
+                const body = encodeURIComponent(`${data.message}\n\n— ${data.name} (${data.email})`);
+                window.location.href = `mailto:gabrielydivulga@gmail.com?subject=${subject}&body=${body}`;
+                return false;
+            }
+            window.sendMessage = sendMessage;
+        });
+    </script>
+</body>
+</html>
